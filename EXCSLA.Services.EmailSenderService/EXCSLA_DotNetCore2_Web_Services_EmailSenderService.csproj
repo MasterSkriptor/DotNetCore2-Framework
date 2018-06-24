@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <PackageId>EXCSLA.DotNetCore2.Web.EmailSenderService</PackageId>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Version>1.1.0</Version>
+    <Authors>H.E. Collins</Authors>
+    <Company>Executive Computer Systems, LLC</Company>
+    <Product>EXCSLA.DotNetCore2.WebFramework</Product>
+    <Description>An email service for use with DotNet Core 2 Websites.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EXCSLA.DotNetCore2.Web.Interfaces" Version="1.1.0" />
+  </ItemGroup>
+</Project>

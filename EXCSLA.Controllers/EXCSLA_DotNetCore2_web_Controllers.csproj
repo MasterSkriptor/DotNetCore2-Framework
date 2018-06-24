@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <PackageId>EXCSLA.DotNetCore2.Web.Controllers</PackageId>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Version>1.1.0</Version>
+    <Authors>H.E. Collins</Authors>
+    <Company>Executive Computer Systems, LLC</Company>
+    <Product>EXCSLA.DotNetCore2.WebFramework</Product>
+    <Description>A generic controller base for use with DotNet Core 2 Entity Framework Websites.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.1" PrivateAssets="All" />
+    <PackageReference Include="EXCSLA.DotNetCore2.Web.DataService" Version="1.1.0" />
+    <PackageReference Include="EXCSLA.DotNetCore2.Web.Models" Version="1.1.0" />
+    <PackageReference Include="EXCSLA.DotNetCore2.Web.ViewModels" Version="1.1.0" />
+  </ItemGroup>
+
+</Project>
