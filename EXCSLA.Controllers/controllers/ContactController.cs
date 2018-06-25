@@ -35,7 +35,7 @@ namespace EXCSLA.Controllers
         }
 
         [Authorize(Roles = "Administrator")]
-        public async Task<IActionResult> Admin()
+        public virtual async Task<IActionResult> Admin()
         {
             var viewModel = new ContactAdminViewModel();
             viewModel.Contacts = await _context.GetAllAsync<Contact>();
@@ -45,7 +45,7 @@ namespace EXCSLA.Controllers
         }
 
         [Authorize(Roles = "Administrator")]
-        public async Task<IActionResult> Edit(int? id)
+        public virtual async Task<IActionResult> Edit(int? id)
         {
             if(id == null) return NotFound();
 
@@ -57,7 +57,7 @@ namespace EXCSLA.Controllers
         }
 
         [Authorize(Roles = "Administrator")]
-        public async Task<IActionResult> Reply(int? id)
+        public virtual async Task<IActionResult> Reply(int? id)
         {
             if(id == null) return NotFound();
 
@@ -74,7 +74,7 @@ namespace EXCSLA.Controllers
 
         [Authorize(Roles = "Administrator")]
         [HttpPost][ValidateAntiForgeryToken]
-        public async Task<IActionResult> Reply(int? id, ContactReplyViewModel model)
+        public virtual async Task<IActionResult> Reply(int? id, ContactReplyViewModel model)
         {
             string subject;
             string returnEmail;
@@ -124,7 +124,7 @@ namespace EXCSLA.Controllers
         }
 
         [AllowAnonymous]
-        public async Task<IActionResult> Index()
+        public virtual async Task<IActionResult> Index()
         {
             ViewData["Message"] = "Your contact page.";
             var model = new ContactViewModel();
@@ -134,7 +134,7 @@ namespace EXCSLA.Controllers
 
         [AllowAnonymous]
         [HttpPost][AutoValidateAntiforgeryToken]
-        public async Task<IActionResult> Index(ContactViewModel viewModel)
+        public virtual async Task<IActionResult> Index(ContactViewModel viewModel)
         {
             // In case ModelState is invalid
             viewModel.SetContactReasons(await _context.GetAllAsync<ContactReason>());
@@ -160,14 +160,14 @@ namespace EXCSLA.Controllers
         }
 
         [Authorize(Roles = "Administrator")]
-        public IActionResult ContactReasonAdd()
+        public virtual IActionResult ContactReasonAdd()
         {
             return View();
         }
 
         [Authorize(Roles = "Administrator")]
         [HttpPost][ValidateAntiForgeryToken]
-        public async Task<IActionResult> ContactReasonAdd([Bind("Name, EmailTo")]ContactReason reason)
+        public virtual async Task<IActionResult> ContactReasonAdd([Bind("Name, EmailTo")]ContactReason reason)
         {
             _context.Create<ContactReason>(reason);
             await _context.SaveAsync();
@@ -176,8 +176,7 @@ namespace EXCSLA.Controllers
         }
 
         [Authorize(Roles = "Administrator")]
-        [Route("[controller]/[action]/{id?}")]
-        public async Task<IActionResult> ContactReasonEdit(int? id)
+        public virtual async Task<IActionResult> ContactReasonEdit(int? id)
         {
             if(id == null || id < 0)
                 return NotFound();
@@ -189,8 +188,7 @@ namespace EXCSLA.Controllers
 
         [Authorize(Roles = "Administrator")]
         [HttpPost][ValidateAntiForgeryToken]
-        [Route("[controller]/[action]/{id?}")]
-        public async Task<IActionResult> ContactReasonEdit(int? id, [Bind("Id, Name, EmailTo, Version")] ContactReason reason)
+        public virtual async Task<IActionResult> ContactReasonEdit(int? id, [Bind("Id, Name, EmailTo, Version")] ContactReason reason)
         {
             if(id == null || id != reason.Id)
                 return NotFound();
@@ -202,8 +200,7 @@ namespace EXCSLA.Controllers
         }
 
         [Authorize(Roles = "Administrator")]
-        [Route("[controller]/[action]/{id?}")]
-        public async Task<IActionResult> ContactReasonDelete(int? id)
+        public virtual async Task<IActionResult> ContactReasonDelete(int? id)
         {
             if (id == null || id < 0)
                 return NotFound();
@@ -218,8 +215,7 @@ namespace EXCSLA.Controllers
 
         [Authorize(Roles = "Administrator")]
         [HttpPost, ActionName("ContactReasonDelete")] [ValidateAntiForgeryToken]
-        [Route("[controller]/[action]/{id?}")]
-        public async Task<IActionResult> ContactReasonDeleteConfirmed(int? id)
+        public virtual async Task<IActionResult> ContactReasonDeleteConfirmed(int? id)
         {
             if (id == null || id < 0)
                 return NotFound();
@@ -235,7 +231,7 @@ namespace EXCSLA.Controllers
         }
 
         [Authorize(Roles = "Administrator")]
-        public IActionResult HandleContact(int? id)
+        public virtual IActionResult HandleContact(int? id)
         {
             if(id == null) return NotFound();
 
@@ -247,8 +243,7 @@ namespace EXCSLA.Controllers
 
         [Authorize(Roles = "Administrator")]
         [HttpPost][ValidateAntiForgeryToken]
-        [Route("[controller]/[action]/{id?}")]
-        public async Task<IActionResult> HandleContact(int? id, bool confirm)
+        public virtual async Task<IActionResult> HandleContact(int? id, bool confirm)
         {
             if(id == null) return NotFound();
 
@@ -265,7 +260,7 @@ namespace EXCSLA.Controllers
         }
 
         [Authorize(Roles = "Administrator")]
-        public IActionResult FlushHandledContacts()
+        public virtual IActionResult FlushHandledContacts()
         {
             var model = new ConfirmDelete();
 
@@ -274,8 +269,7 @@ namespace EXCSLA.Controllers
 
         [Authorize(Roles = "Administrator")]
         [HttpPost][ValidateAntiForgeryToken]
-        [Route("[controller]/[action]/{id?}")]
-        public async Task<IActionResult> FlushHandledContacts(bool confirm)
+        public virtual async Task<IActionResult> FlushHandledContacts(bool confirm)
         {
             if(confirm == true)
             {
@@ -297,7 +291,7 @@ namespace EXCSLA.Controllers
             return RedirectToAction("Admin");
         }
 
-        public async Task SendContactEmail(Contact contact, string replyUrl)
+        public virtual async Task SendContactEmail(Contact contact, string replyUrl)
         {
             // Send email to the person responsible for the contact
             string email = contact.ContactReason.EmailTo;
@@ -310,7 +304,7 @@ namespace EXCSLA.Controllers
             // to the person who made the request.
         }
 
-        private string GetMessageString(Contact contact, string replyUrl)
+        protected virtual string GetMessageString(Contact contact, string replyUrl)
         {
             StringBuilder messageToReturn = new StringBuilder();
             
