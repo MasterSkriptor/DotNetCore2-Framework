@@ -227,7 +227,7 @@ namespace EXCSLA.Controllers
             _context.Delete<ContactReason>(reason);
             await _context.SaveAsync();
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Admin");
         }
 
         [Authorize(Roles = "Administrator")]
