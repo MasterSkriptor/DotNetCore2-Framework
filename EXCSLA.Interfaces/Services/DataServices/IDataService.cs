@@ -19,6 +19,15 @@ namespace EXCSLA.Services.DataServices
         void Delete<TEntity>(TEntity entity)
             where TEntity : class, IEntity;
 
+        void CreateChild<TEntityChild>(TEntityChild entityChild)
+            where TEntityChild : class, IEntityChild;
+
+        void UpdateChild<TEntityChild>(TEntityChild entityChild) 
+            where TEntityChild : class, IEntityChild;
+        
+        void DeleteChild<TEntityChild>(TEntityChild entityChild) 
+            where TEntityChild : class, IEntityChild;
+
         void Save();
 
         Task SaveAsync();
