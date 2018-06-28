@@ -13,11 +13,10 @@ namespace EXCSLA.Services.FileUploadServices
         private readonly IHostingEnvironment _environment;
         private string uploadPath;
 
-        public FileUploadService(IHostingEnvironment environment)
+        public FileUploadService(FileUploadOptions options)
         {
-            _environment = environment;
-            // TODO: Get the imaages/products from a configuration file...
-            uploadPath = Path.Combine(_environment.WebRootPath, "images/products");
+            _environment = options.Environment;
+            uploadPath = options.DefaultUploadPath;
         }
 
         public bool FileExists(string fileName)
@@ -27,11 +26,23 @@ namespace EXCSLA.Services.FileUploadServices
 
         public void UploadFile(IFormFile file)
         {
+            UploadFile(file, "");
+        }
+        public void UploadFile(IFormFile file, string relativePath)
+        {
             try
             {
                 if (file.Length > 0)
                 {
-                    var filename = Path.Combine(uploadPath, Path.GetFileName(file.FileName));
+                    string filename;
+                    string path;
+
+                    if(string.IsNullOrEmpty(relativePath))
+                        path = uploadPath;
+                    else
+                        path = relativePath;
+                    
+                    filename = Path.Combine(path, Path.GetFileName(file.FileName));               
                     using (var fileStream = new FileStream(filename, FileMode.Create))
                     {
                         file.CopyTo(fileStream);
@@ -47,11 +58,22 @@ namespace EXCSLA.Services.FileUploadServices
 
         public async Task UploadFileAsync(IFormFile file)
         {
+            await UploadFileAsync(file, "");
+        }
+        public async Task UploadFileAsync(IFormFile file, string relativePath)
+        {
             try
             {
                 if (file.Length > 0)
                 {
-                    var filename = Path.Combine(uploadPath, Path.GetFileName(file.FileName));
+                    string path;
+
+                    if(string.IsNullOrEmpty(relativePath))
+                        path = uploadPath;
+                    else
+                        path = relativePath;
+
+                    var filename = Path.Combine(path, Path.GetFileName(file.FileName));
                     using (var fileStream = new FileStream(filename, FileMode.Create))
                     {
                         await file.CopyToAsync(fileStream);
@@ -67,18 +89,39 @@ namespace EXCSLA.Services.FileUploadServices
 
         public void UploadFiles(ICollection<IFormFile> Files)
         {
+            UploadFiles(Files, "");
+        }
+        public void UploadFiles(ICollection<IFormFile> Files, string relativePath)
+        {
+            string path;
+
+            if(string.IsNullOrEmpty(relativePath))
+                path = uploadPath;
+            else
+                path = relativePath;
+            
             foreach (var file in Files)
             {
-                UploadFile(file);
+                UploadFile(file, path);
             }
         }
 
         public async Task UploadFilesAsync(ICollection<IFormFile> Files)
         {
-            
+            await UploadFilesAsync(Files, "");
+        }
+        public async Task UploadFilesAsync(ICollection<IFormFile> Files, string relativePath)
+        {
+            string path;
+
+            if(string.IsNullOrEmpty(relativePath))
+                path = uploadPath;
+            else
+                path = relativePath;
+
             foreach (var file in Files)
             {
-                await UploadFileAsync(file);
+                await UploadFileAsync(file, path);
             }
         }
     }
