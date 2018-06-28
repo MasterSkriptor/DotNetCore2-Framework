@@ -4,7 +4,7 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <PackageId>EXCSLA.DotNetCore2.Web.Models</PackageId>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>1.1.0</Version>
+    <Version>1.1.1</Version>
     <Authors>H.E. Collins</Authors>
     <Company>Executive Computer Systems, LLC</Company>
     <Product>EXCSLA.DotNetCore2.WebFramework</Product>
@@ -14,7 +14,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.1" PrivateAssets="All" />
-    <PackageReference Include="EXCSLA.DotNetCore2.Web.Interfaces" Version="1.1.0" />
+    <PackageReference Include="EXCSLA.DotNetCore2.Web.Interfaces" Version="1.1.1" />
   </ItemGroup>
 
 
