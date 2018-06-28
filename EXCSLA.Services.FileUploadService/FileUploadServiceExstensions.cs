@@ -5,9 +5,9 @@ namespace EXCSLA.Exstensions
 {
     public static class FileUploadServiceExtensions
     {
-        public static IServiceCollection AddFileUploadService(this IServiceCollection services)
+        public static IServiceCollection AddFileUploadService(this IServiceCollection services, FileUploadOptions options)
         {
-            return services.AddTransient<IFileUpload, FileUploadService>();
+            return services.AddTransient<IFileUpload>(factory => new FileUploadService(options));
         }
     }
 }
