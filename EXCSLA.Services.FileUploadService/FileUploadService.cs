@@ -40,7 +40,7 @@ namespace EXCSLA.Services.FileUploadServices
                     if(string.IsNullOrEmpty(relativePath))
                         path = uploadPath;
                     else
-                        path = relativePath;
+                        path = Path.Combine(_environment.WebRootPath, relativePath);
                     
                     filename = Path.Combine(path, Path.GetFileName(file.FileName));               
                     using (var fileStream = new FileStream(filename, FileMode.Create))
