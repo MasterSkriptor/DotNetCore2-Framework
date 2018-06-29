@@ -16,7 +16,7 @@ namespace EXCSLA.Services.FileUploadServices
         public FileUploadService(FileUploadOptions options)
         {
             _environment = options.Environment;
-            uploadPath = options.DefaultUploadPath;
+            uploadPath = Path.Combine(_environment.WebRootPath, options.DefaultUploadPath);
         }
 
         public bool FileExists(string fileName)
