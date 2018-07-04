@@ -227,10 +227,10 @@ namespace EXCSLA.Services.DataServices.EFDataServices
         }
 
         public virtual TEntityChild GetFirstChild<TEntityChild>(
-        Expression<Func<TEntityChild, bool>> filter = null,
-        Func<IQueryable<TEntityChild>, IOrderedQueryable<TEntityChild>> orderBy = null,
-        string includeProperties = "")
-        where TEntityChild : class, IEntityChild
+            Expression<Func<TEntityChild, bool>> filter = null,
+            Func<IQueryable<TEntityChild>, IOrderedQueryable<TEntityChild>> orderBy = null,
+            string includeProperties = "")
+            where TEntityChild : class, IEntityChild
         {
             return GetQueryableChildren<TEntityChild>(filter, orderBy, includeProperties).FirstOrDefault();
         }
@@ -263,10 +263,10 @@ namespace EXCSLA.Services.DataServices.EFDataServices
         }
 
         public virtual TEntityChild GetLastChild<TEntityChild>(
-        Expression<Func<TEntityChild, bool>> filter = null,
-        Func<IQueryable<TEntityChild>, IOrderedQueryable<TEntityChild>> orderBy = null,
-        string includeProperties = "")
-        where TEntityChild : class, IEntityChild
+            Expression<Func<TEntityChild, bool>> filter = null,
+            Func<IQueryable<TEntityChild>, IOrderedQueryable<TEntityChild>> orderBy = null,
+            string includeProperties = "")
+            where TEntityChild : class, IEntityChild
         {
             return GetQueryableChildren<TEntityChild>(filter, orderBy, includeProperties).LastOrDefault();
         }
