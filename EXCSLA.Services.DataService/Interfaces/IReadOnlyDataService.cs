@@ -9,21 +9,21 @@ namespace EXCSLA.Services.DataServices
 {
     public interface IReadOnlyDataService
     {
-        IEnumerable<TEntity> GetAll<TEntity>(
+        List<TEntity> GetAll<TEntity>(
         Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
         string includeProperties = null,
         int? skip = null,
         int? take = null)
         where TEntity : class, IEntity;
 
-    Task<IEnumerable<TEntity>> GetAllAsync<TEntity>(
+    Task<List<TEntity>> GetAllAsync<TEntity>(
         Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
         string includeProperties = null,
         int? skip = null,
         int? take = null)
         where TEntity : class, IEntity;
 
-    IEnumerable<TEntity> Get<TEntity>(
+    List<TEntity> Get<TEntity>(
         Expression<Func<TEntity, bool>> filter = null,
         Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
         string includeProperties = null,
@@ -31,7 +31,7 @@ namespace EXCSLA.Services.DataServices
         int? take = null)
         where TEntity : class, IEntity;
 
-    Task<IEnumerable<TEntity>> GetAsync<TEntity>(
+    Task<List<TEntity>> GetAsync<TEntity>(
         Expression<Func<TEntity, bool>> filter = null,
         Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
         string includeProperties = null,

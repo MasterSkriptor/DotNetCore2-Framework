@@ -98,7 +98,7 @@ namespace EXCSLA.Services.DataServices.EFDataServices
             return query;
         }
 
-        public virtual IEnumerable<TEntity> GetAll<TEntity>(
+        public virtual List<TEntity> GetAll<TEntity>(
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
             string includeProperties = null,
             int? skip = null,
@@ -108,7 +108,7 @@ namespace EXCSLA.Services.DataServices.EFDataServices
             return GetQueryable<TEntity>(null, orderBy, includeProperties, skip, take).ToList();
         }
 
-        public virtual async Task<IEnumerable<TEntity>> GetAllAsync<TEntity>(
+        public virtual async Task<List<TEntity>> GetAllAsync<TEntity>(
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
             string includeProperties = null,
             int? skip = null,
@@ -118,7 +118,7 @@ namespace EXCSLA.Services.DataServices.EFDataServices
             return await GetQueryable<TEntity>(null, orderBy, includeProperties, skip, take).ToListAsync();
         }
 
-        public virtual IEnumerable<TEntityChild> GetAllChildren<TEntityChild>(object parentID, 
+        public virtual List<TEntityChild> GetAllChildren<TEntityChild>(object parentID, 
             Func<IQueryable<TEntityChild>, IOrderedQueryable<TEntityChild>> orderBy = null, 
             string includeProperties = null, 
             int? skip = null, 
@@ -127,7 +127,7 @@ namespace EXCSLA.Services.DataServices.EFDataServices
             return GetQueryableChildren<TEntityChild>(c => c.ParentId == parentID, orderBy, includeProperties, skip, take).ToList();
         }
 
-        public virtual async Task<IEnumerable<TEntityChild>> GetAllChildrenAsync<TEntityChild>(object parentID, 
+        public virtual async Task<List<TEntityChild>> GetAllChildrenAsync<TEntityChild>(object parentID, 
             Func<IQueryable<TEntityChild>, IOrderedQueryable<TEntityChild>> orderBy = null, 
             string includeProperties = null, 
             int? skip = null, 
@@ -136,7 +136,7 @@ namespace EXCSLA.Services.DataServices.EFDataServices
             return await GetQueryableChildren<TEntityChild>(c => c.ParentId == parentID, orderBy, includeProperties, skip, take).ToListAsync();
         }
 
-        public virtual IEnumerable<TEntity> Get<TEntity>(
+        public virtual List<TEntity> Get<TEntity>(
             Expression<Func<TEntity, bool>> filter = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
             string includeProperties = null,
@@ -147,7 +147,7 @@ namespace EXCSLA.Services.DataServices.EFDataServices
             return GetQueryable<TEntity>(filter, orderBy, includeProperties, skip, take).ToList();
         }
 
-        public virtual async Task<IEnumerable<TEntity>> GetAsync<TEntity>(
+        public virtual async Task<List<TEntity>> GetAsync<TEntity>(
             Expression<Func<TEntity, bool>> filter = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
             string includeProperties = null,
@@ -158,7 +158,7 @@ namespace EXCSLA.Services.DataServices.EFDataServices
             return await GetQueryable<TEntity>(filter, orderBy, includeProperties, skip, take).ToListAsync();
         }
 
-        public virtual IEnumerable<TEntityChild> GetChild<TEntityChild>(
+        public virtual List<TEntityChild> GetChild<TEntityChild>(
             Expression<Func<TEntityChild, bool>> filter = null,
             Func<IQueryable<TEntityChild>, IOrderedQueryable<TEntityChild>> orderBy = null,
             string includeProperties = null,
@@ -168,7 +168,7 @@ namespace EXCSLA.Services.DataServices.EFDataServices
             return GetQueryableChildren<TEntityChild>(filter, orderBy, includeProperties, skip, take).ToList();
         }
 
-        public async virtual Task<IEnumerable<TEntityChild>> GetChildAsync<TEntityChild>(
+        public async virtual Task<List<TEntityChild>> GetChildAsync<TEntityChild>(
             Expression<Func<TEntityChild, bool>> filter = null,
             Func<IQueryable<TEntityChild>, IOrderedQueryable<TEntityChild>> orderBy = null,
             string includeProperties = null,
