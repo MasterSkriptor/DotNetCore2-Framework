@@ -4,7 +4,7 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <PackageId>EXCSLA.DotNetCore2.Web.Controllers</PackageId>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>2.0.1</Version>
+    <Version>2.0.7</Version>
     <Authors>H.E. Collins</Authors>
     <Company>Executive Computer Systems, LLC</Company>
     <Product>EXCSLA.DotNetCore2.WebFramework</Product>
@@ -15,7 +15,7 @@
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.1" PrivateAssets="All" />
-    <PackageReference Include="EXCSLA.DotNetCore2.Web.DataService" Version="2.0.1" />
+    <PackageReference Include="EXCSLA.DotNetCore2.Web.DataService" Version="2.0.5" />
     <PackageReference Include="EXCSLA.DotNetCore2.Web.EmailSenderService" Version="2.0.1" />
   </ItemGroup>
 

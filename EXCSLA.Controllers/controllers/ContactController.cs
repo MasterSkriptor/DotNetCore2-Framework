@@ -16,17 +16,18 @@ using Microsoft.Extensions.Configuration;
 
 namespace EXCSLA.Controllers
 {
-    public abstract class ContactControllerBase<TContext, TEmailSender> : Controller
+    public abstract class ContactControllerBase<TContext, TEmailSender, TIdentityUser> : Controller
         where TContext : IDataService
         where TEmailSender : IEmailSender
+        where TIdentityUser : IdentityUser
     {
         private TContext _context;
         private TEmailSender _emailSender;
-        private UserManager<ApplicationUser> _userManager;
+        private UserManager<TIdentityUser> _userManager;
         private IConfiguration _configuration;
 
         public ContactControllerBase(TContext context, TEmailSender emailSender, 
-            UserManager<ApplicationUser> userManager, IConfiguration configuration)
+            UserManager<TIdentityUser> userManager, IConfiguration configuration)
         {
             _context = context;
             _emailSender = emailSender;
