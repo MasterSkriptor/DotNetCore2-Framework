@@ -1,6 +1,5 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using EXCSLA.Models;
 using EXCSLA.Services.DataServices;
@@ -8,7 +7,6 @@ using Microsoft.AspNetCore.Identity;
 
 namespace EXCSLA.Controllers
 {
-    [Authorize]
     public class EntityBaseController<TContext, TEntity, TIdentityUser> : Controller 
         where TContext : DbContext 
         where TEntity : class, IEntity, new()
@@ -23,7 +21,6 @@ namespace EXCSLA.Controllers
             _userManager = userManager;
         }
 
-        [AllowAnonymous]
         public virtual async Task<IActionResult> Index()
         {
             var model = await _dataService.GetAllAsync<TEntity>();
@@ -33,7 +30,6 @@ namespace EXCSLA.Controllers
             return View(model);
         }
 
-        [AllowAnonymous]
         public virtual async Task<IActionResult> Item(int? id)
         {
             if(id == null) return NotFound();
@@ -45,7 +41,6 @@ namespace EXCSLA.Controllers
             return View(model);
         }
 
-        [Authorize(Roles = "Administrator")]
         public virtual async Task<IActionResult> Admin()
         {
             var model = await _dataService.GetAllAsync<TEntity>();
@@ -56,7 +51,6 @@ namespace EXCSLA.Controllers
             return View(model);
         }
 
-        [Authorize(Roles = "Administrator")]
         public virtual IActionResult Create()
         {
             TEntity model = new TEntity();
@@ -64,7 +58,6 @@ namespace EXCSLA.Controllers
             return View(model);
         }
 
-        [Authorize(Roles = "Administrator")]
         [HttpPost][ValidateAntiForgeryToken]
         public virtual async Task<IActionResult> Create(TEntity model)
         {
@@ -74,7 +67,6 @@ namespace EXCSLA.Controllers
             return RedirectToAction("Admin");
         }
 
-        [Authorize(Roles = "Administrator")]
         public virtual async Task<IActionResult> Edit(int? id)
         {
             if(id == null)
@@ -88,7 +80,6 @@ namespace EXCSLA.Controllers
             return View(model);
         }
 
-        [Authorize(Roles = "Administrator")]
         [HttpPost][ValidateAntiForgeryToken]
         public virtual async Task<IActionResult> Edit(int? id, TEntity model)
         {
@@ -102,7 +93,6 @@ namespace EXCSLA.Controllers
 
         }
 
-        [Authorize(Roles = "Administrator")]
         public virtual async Task<IActionResult> Delete(int? id)
         {
             if( id == null)
@@ -116,7 +106,6 @@ namespace EXCSLA.Controllers
             return View(model);
         }
 
-        [Authorize(Roles = "Administrator")]
         [HttpPost][ValidateAntiForgeryToken]
         public virtual async Task<IActionResult> Delete(int? id, TEntity model)
         {
