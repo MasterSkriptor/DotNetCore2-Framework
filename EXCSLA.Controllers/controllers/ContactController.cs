@@ -295,7 +295,7 @@ namespace EXCSLA.Controllers
         {
             // Send email to the person responsible for the contact
             string email = contact.ContactReason.EmailTo;
-            string subject = "MamaTara Website Contact";
+            string subject = "Website Contact";
             string message = GetMessageString(contact, replyUrl);
 
             await _emailSender.SendEmailAsync(email, subject, message);
